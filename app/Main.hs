@@ -1,6 +1,9 @@
 module Main where
 
-import Lib
+import Game(startGame)
 
 main :: IO ()
-main = someFunc
+main =
+    do
+        putStrLn "Hello, world!"
+        startGame

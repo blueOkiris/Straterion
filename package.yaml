@@ -21,6 +21,8 @@ description:         Please see the README on GitHub at <https://github.com/gith
 
 dependencies:
 - base >= 4.7 && < 5
+- gloss-juicy >= 0.2.3
+- gloss
 
 library:
   source-dirs: src
@@ -36,13 +38,3 @@ executables:
     dependencies:
     - straterion
 
-tests:
-  straterion-test:
-    main:                Spec.hs
-    source-dirs:         test
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - straterion
