@@ -7,6 +7,7 @@ import Graphics.Gloss.Data.ViewPort
 
 import State(GameWindow(..), GameState(..), Sprite(..), drawSprite)
 import Globals(startState)
+import Input(handler)
 
 -- Draw everything important on screen
 -- Will eventually "iterate" through a list of GameObjects and draw their sprites
@@ -26,12 +27,6 @@ update deltaTime state =
     state { animCounter = increaseCounter }
     where
         increaseCounter = (animCounter state) + deltaTime
-
--- Here we have a list of event handlers
--- When they get large enough, they'll all probably get moved to a separate file
-handler :: Event -> GameState -> GameState
-handler _ state =
-    state
 
 -- This initalizes the "play" command
 -- play is of type :: Display -> Color -> Int -> T -> (T -> Picture) -> (Event -> T -> T) -> (Float -> T -> T)
