@@ -11,3 +11,4 @@ data GameWindow =
 
 data GameState =
     GameState   { window        :: GameWindow }
+
