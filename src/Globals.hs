@@ -4,6 +4,10 @@ import Graphics.Gloss(white, Display(InWindow))
 
 import State(GameWindow(..), GameState(..), Sprite(..), pngToPicture)
 
+-- This is the initial state for EVERYTHING
+-- window creates the actual running window
+-- spr* load from the specified files
+-- all the actual "states" of the game set to defaults and everything
 startState :: GameState
 startState =
     GameState   { window =
