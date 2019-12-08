@@ -5,7 +5,7 @@ import Graphics.Gloss   ( Picture, pictures, circleSolid, translate
                         , red, color )
 import Graphics.Gloss.Data.ViewPort
 
-import State(GameWindow(..), GameState(..), Sprite(..), drawSprite)
+import State(GameWindow(..), GameState(..), Sprite(..), GameObject(..), drawSprite, drawGameObject)
 import Globals(startState)
 import Input(handler)
 
@@ -15,18 +15,21 @@ import Input(handler)
 render :: GameState -> Picture
 render state =
     -- Test basic drawing and changed viewport/coordinate system
-    pictures    [ color red (circleSolid 100)
-                , translate 100 (-100) (color red (circleSolid 100)) 
-                , drawSprite state $ sprCubeManIdle state
-                , drawSprite state $ sprCubeManWalk state ]
+    pictures    --[ color red (circleSolid 100)
+                --, translate 100 (-100) (color red (circleSolid 100)) 
+                --, drawSprite state $ sprCubeManIdle state
+                --, drawSprite state $ sprCubeManWalk state ]
+                [ drawGameObject state $ player state ]
 
 -- This updates all the moving objects in the system
 -- It also increases animCounter which allows render to display the correct frame
 update :: Float -> GameState -> GameState
 update deltaTime state =
-    state { animCounter = increaseCounter }
+    state   { animCounter = increaseCounter
+            , player =      playerUpdate (player state) }
     where
         increaseCounter = (animCounter state) + deltaTime
+        playerUpdate = (updateObject (player state)) state
 
 -- This initalizes the "play" command
 -- play is of type :: Display -> Color -> Int -> T -> (T -> Picture) -> (Event -> T -> T) -> (Float -> T -> T)

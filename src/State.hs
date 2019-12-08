@@ -20,13 +20,24 @@ data Sprite =
                 , position          :: (Float, Float)
                 , imageSpeed        :: Float }
 
+-- A game object that uses a specific sprite, but can interact with stuff
+data GameObject =
+    GameObject  { spriteIndex       :: Sprite
+                , objPosition       :: (Float, Float)
+                , velocity          :: (Float, Float)
+                , collisionMask     :: [(Float, Float)] 
+                , updateObject      :: GameState -> GameObject -> GameObject }
+
 -- Overall state of the game
 -- Includes sprites, gameobjects, window, actual state (like map/dialog/battle), etc
 data GameState =
     GameState   { window            :: GameWindow
                 , animCounter       :: Float 
                 , sprCubeManWalk    :: Sprite 
-                , sprCubeManIdle    :: Sprite }
+                , sprCubeManIdle    :: Sprite
+                , sprStickPIdleR    :: Sprite
+                , sprStickPWalkR    :: Sprite 
+                , player            :: GameObject }
 
 -- Functions for dealing with sprite drawing
 imageIndex :: GameState -> Sprite -> Int            -- Get the current frame of the image based on animation speed, time passed, and fps
@@ -44,3 +55,10 @@ drawSprite state spr =                              -- Makes sure to invert the 
 pngToPicture :: FilePath -> Picture
 pngToPicture fname =
     maybe (text "PNG ERROR") id (unsafePerformIO $ loadJuicyPNG fname)
+
+-- Functions for drawing the sprite of a game object
+drawGameObject :: GameState -> GameObject -> Picture
+drawGameObject state obj =
+    drawSprite state ((spriteIndex obj) { position = objPos })
+    where
+        objPos = objPosition obj

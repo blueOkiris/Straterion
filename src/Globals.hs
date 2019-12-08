@@ -2,7 +2,20 @@ module Globals where
 
 import Graphics.Gloss(white, Display(InWindow))
 
-import State(GameWindow(..), GameState(..), Sprite(..), pngToPicture)
+import State(GameWindow(..), GameState(..), Sprite(..), GameObject(..), pngToPicture)
+
+-- Example gameobject update
+-- Moves until past 800 and then jumps back
+playerUpdate :: GameState -> GameObject -> GameObject
+playerUpdate state obj =
+    obj { objPosition = (xp, y) }
+    where
+        (x, y) = objPosition obj
+        xp =
+            if x > 900 then
+                200
+            else
+                x + 16
 
 -- This is the initial state for EVERYTHING
 -- window creates the actual running window
@@ -11,18 +24,41 @@ import State(GameWindow(..), GameState(..), Sprite(..), pngToPicture)
 startState :: GameState
 startState =
     GameState   { window =
-                    GameWindow  { bgColor = white
-                                , fps =     60
-                                , display = InWindow "Straterion" (1280, 720) (200, 200)
-                                , width =   1280
-                                , height =  720 }
-                , animCounter = 0 
-                , sprCubeManWalk =
-                    Sprite  { images =      [ pngToPicture "images/cube-man/cube-man-walk-0.png"
-                                            , pngToPicture "images/cube-man/cube-man-walk-1.png" ]
-                            , position =    (200, 200)
-                            , imageSpeed =  30 }
-                , sprCubeManIdle =
-                    Sprite  { images =      [ pngToPicture "images/cube-man/cube-man-idle.png" ]
-                            , position =    (800, 200)
-                            , imageSpeed =  0 } }
+                    GameWindow      { bgColor = white
+                                    , fps =     60
+                                    , display = InWindow "Straterion" (1280, 720) (200, 200)
+                                    , width =   1280
+                                    , height =  720 }
+                , animCounter =     0 
+                , sprCubeManWalk =  spr_cubemanwalk
+                , sprCubeManIdle =  spr_cubemanidle
+                , sprStickPIdleR =  spr_stickpidler
+                , sprStickPWalkR =  spr_stickpwalkr
+                , player =
+                    GameObject      { spriteIndex =     spr_stickpwalkr
+                                    , objPosition =     (200, 200)
+                                    , velocity =        (0, 0)
+                                    , collisionMask =   [(0, 0), (256, 256)]
+                                    , updateObject =    playerUpdate } }
+    where
+        spr_cubemanwalk =   Sprite  { images =      [ pngToPicture "images/cube-man/cube-man-walk-0.png"
+                                    , pngToPicture "images/cube-man/cube-man-walk-1.png" ]
+                                    , position =    (0, 0)
+                                    , imageSpeed =  30 }
+        spr_cubemanidle =   Sprite  { images =      [ pngToPicture "images/cube-man/cube-man-idle.png" ]
+                                    , position =    (0, 0)
+                                    , imageSpeed =  0 }
+        spr_stickpidler =   Sprite  { images =      [ pngToPicture "images/player-placeholder/right/idle-0.png"
+                                    , pngToPicture "images/player-placeholder/right/idle-1.png"
+                                    , pngToPicture "images/player-placeholder/right/idle-2.png"] 
+                                    , position =    (0, 0)
+                                    , imageSpeed =  0 }
+        spr_stickpwalkr =   Sprite  { images =      [ pngToPicture "images/player-placeholder/right/walk-0.png"
+                                    , pngToPicture "images/player-placeholder/right/walk-1.png"
+                                    , pngToPicture "images/player-placeholder/right/walk-2.png"
+                                    , pngToPicture "images/player-placeholder/right/walk-3.png"
+                                    , pngToPicture "images/player-placeholder/right/walk-4.png"
+                                    , pngToPicture "images/player-placeholder/right/walk-5.png"
+                                    , pngToPicture "images/player-placeholder/right/walk-6.png" ]
+                                    , position =    (0, 0)
+                                    , imageSpeed =  4 }
