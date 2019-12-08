@@ -29,18 +29,22 @@ data GameObject =
                 , collisionMask     :: [(Float, Float)] 
                 , updateObject      :: GameState -> GameObject -> GameObject }
 
+-- A way to draw a bunch of ground srpites at once
+-- It includes:
+--  * a set of sprites in the tile set
+--  * the location in the world space (usually just (0, 0))
+--  * a 2d matrix of indices to indicate which sprite of the set goes where
+data TileMap =
+    TileMap     { spriteSet         :: [Sprite]
+                , worldPosition     :: (Float, Float)
+                , tiles             :: [[Int]]}
+
 -- Overall state of the game
 -- Includes sprites, gameobjects, window, actual state (like map/dialog/battle), etc
 data GameState =
     GameState   { window            :: GameWindow
                 , animCounter       :: Float
                 , deltaTime         :: Float
-                --, sprCubeManWalk    :: Sprite 
-                --, sprCubeManIdle    :: Sprite
-                --, sprStickPIdleR    :: Sprite
-                --, sprStickPWalkR    :: Sprite 
-                --, sprStickPIdleL    :: Sprite
-                --, sprStickPWalkL    :: Sprite
                 , sprPlayerIdleR    :: Sprite
                 , sprPlayerIdleL    :: Sprite
                 , sprPlayerWalkR    :: Sprite
