@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 7b7023998055ae726fdde5e1ed7597b182b6eea62553ff75def005e0e859e90d
+-- hash: b46c372c54a5523eb522f27473d97ef856956e72455e9890908bc01409721f96
 
 name:           straterion
 version:        0.1.0.0
@@ -30,6 +30,7 @@ library
       Game
       Globals
       Input
+      Player
       State
   other-modules:
       Paths_straterion

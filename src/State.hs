@@ -25,6 +25,7 @@ data GameObject =
     GameObject  { spriteIndex       :: Sprite
                 , objPosition       :: (Float, Float)
                 , velocity          :: (Float, Float)
+                , dir               :: Int
                 , collisionMask     :: [(Float, Float)] 
                 , updateObject      :: GameState -> GameObject -> GameObject }
 
@@ -32,11 +33,15 @@ data GameObject =
 -- Includes sprites, gameobjects, window, actual state (like map/dialog/battle), etc
 data GameState =
     GameState   { window            :: GameWindow
-                , animCounter       :: Float 
+                , animCounter       :: Float
+                , deltaTime         :: Float
                 , sprCubeManWalk    :: Sprite 
                 , sprCubeManIdle    :: Sprite
                 , sprStickPIdleR    :: Sprite
                 , sprStickPWalkR    :: Sprite 
+                , sprStickPIdleL    :: Sprite
+                , sprStickPWalkL    :: Sprite
+                , playerMoveSpd     :: Float
                 , player            :: GameObject }
 
 -- Functions for dealing with sprite drawing

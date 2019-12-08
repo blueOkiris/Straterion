@@ -24,11 +24,12 @@ render state =
 -- This updates all the moving objects in the system
 -- It also increases animCounter which allows render to display the correct frame
 update :: Float -> GameState -> GameState
-update deltaTime state =
+update dt state =
     state   { animCounter = increaseCounter
-            , player =      playerUpdate (player state) }
+            , player =      playerUpdate (player state)
+            , deltaTime =   dt }
     where
-        increaseCounter = (animCounter state) + deltaTime
+        increaseCounter = (animCounter state) + dt
         playerUpdate = (updateObject (player state)) state
 
 -- This initalizes the "play" command
