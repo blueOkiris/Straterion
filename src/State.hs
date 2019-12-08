@@ -35,12 +35,16 @@ data GameState =
     GameState   { window            :: GameWindow
                 , animCounter       :: Float
                 , deltaTime         :: Float
-                , sprCubeManWalk    :: Sprite 
-                , sprCubeManIdle    :: Sprite
-                , sprStickPIdleR    :: Sprite
-                , sprStickPWalkR    :: Sprite 
-                , sprStickPIdleL    :: Sprite
-                , sprStickPWalkL    :: Sprite
+                --, sprCubeManWalk    :: Sprite 
+                --, sprCubeManIdle    :: Sprite
+                --, sprStickPIdleR    :: Sprite
+                --, sprStickPWalkR    :: Sprite 
+                --, sprStickPIdleL    :: Sprite
+                --, sprStickPWalkL    :: Sprite
+                , sprPlayerIdleR    :: Sprite
+                , sprPlayerIdleL    :: Sprite
+                , sprPlayerWalkR    :: Sprite
+                , sprPlayerWalkL    :: Sprite
                 , playerMoveSpd     :: Float
                 , player            :: GameObject }
 

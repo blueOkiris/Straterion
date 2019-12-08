@@ -27,11 +27,11 @@ playerUpdate state player =
         sprInd = 
             if (abs vx) == 0 && (abs vy) == 0 then
                 if direction == 0 then
-                    sprStickPIdleR state
+                    sprPlayerIdleR state
                 else
-                    sprStickPIdleL state
+                    sprPlayerIdleL state
             else
                 if direction == 0 then
-                    sprStickPWalkR state
+                    sprPlayerWalkR state
                 else
-                    sprStickPWalkL state
+                    sprPlayerWalkL state
