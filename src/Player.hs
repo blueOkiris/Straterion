@@ -25,7 +25,7 @@ playerUpdate state player =
                 dir player
         
         sprInd = 
-            if (abs vx) == 0 then
+            if (abs vx) == 0 && (abs vy) == 0 then
                 if direction == 0 then
                     sprStickPIdleR state
                 else
